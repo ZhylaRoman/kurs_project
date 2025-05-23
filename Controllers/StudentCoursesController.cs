@@ -22,7 +22,7 @@ namespace kurs_project.Controllers
                     .ThenInclude(sc => sc.Student)
                 .ToListAsync();
 
-            return View(courses); // Відображаємо курси зі студентами
+            return View(courses);
         }
 
         // GET: StudentCourses/Create
