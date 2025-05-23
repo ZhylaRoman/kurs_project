@@ -22,7 +22,7 @@ namespace kurs_project.Controllers
                     .ThenInclude(tc => tc.Course)
                 .ToListAsync();
 
-            return View(teachers); // Повертаємо вчителів з курсами
+            return View(teachers);
         }
 
         // GET: TeacherCourses/Create
