@@ -14,30 +14,25 @@ namespace kurs_project.Controllers
             _context = context;
         }
 
-        // GET: Courses
         public async Task<IActionResult> Index(int? categoryId)
         {
-            // Використовуємо .AsQueryable() для можливості подальшої фільтрації
             var courses = _context.Courses.Include(c => c.Category).AsQueryable();
 
-            // Фільтрація за категорією
             if (categoryId.HasValue)
             {
                 courses = courses.Where(c => c.CategoryId == categoryId);
             }
 
-            ViewBag.Categories = await _context.Categories.ToListAsync(); // Для фільтрації
+            ViewBag.Categories = await _context.Categories.ToListAsync();
             return View(await courses.ToListAsync());
         }
 
-        // GET: Courses/Create
         public async Task<IActionResult> Create()
         {
-            ViewBag.Categories = await _context.Categories.ToListAsync(); // Для випадаючого списку
+            ViewBag.Categories = await _context.Categories.ToListAsync();
             return View();
         }
 
-        // POST: Courses/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Course course)
@@ -53,7 +48,6 @@ namespace kurs_project.Controllers
             return View(course);
         }
 
-        // GET: Courses/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
             var course = await _context.Courses.FindAsync(id);
@@ -66,7 +60,6 @@ namespace kurs_project.Controllers
             return View(course);
         }
 
-        // POST: Courses/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Course course)
@@ -99,7 +92,6 @@ namespace kurs_project.Controllers
             return View(course);
         }
 
-        // GET: Courses/Delete/5
         public async Task<IActionResult> Delete(int id)
         {
             var course = await _context.Courses.Include(c => c.Category).FirstOrDefaultAsync(c => c.Id == id);
@@ -111,7 +103,6 @@ namespace kurs_project.Controllers
             return View(course);
         }
 
-        // POST: Courses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
