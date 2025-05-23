@@ -115,8 +115,7 @@ namespace kurs_project.Controllers
             PopulateGroupsDropDownList(student.GroupId);
             return View(student);
         }
-
-        // Метод для заповнення списку груп
+        
         private void PopulateGroupsDropDownList(object selectedGroup = null)
         {
             var groupsQuery = from g in _context.Groups
