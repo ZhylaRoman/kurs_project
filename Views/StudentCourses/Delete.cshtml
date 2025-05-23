@@ -1,0 +1,25 @@
+﻿@model kurs_project.Models.StudentCourse
+
+@{
+    ViewData["Title"] = "Remove Student from Course";
+}
+
+<h1>Remove Student from Course</h1>
+
+<div>
+    <p>Are you sure you want to remove the following student from the course?</p>
+    <dl class="row">
+        <dt class="col-sm-2">Student</dt>
+        <dd class="col-sm-10">@Model.Student.Name</dd>
+
+        <dt class="col-sm-2">Course</dt>
+        <dd class="col-sm-10">@Model.Course.Title</dd>
+    </dl>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="StudentId" />
+    <input type="hidden" asp-for="CourseId" />
+    <button type="submit" class="btn btn-danger">Remove</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

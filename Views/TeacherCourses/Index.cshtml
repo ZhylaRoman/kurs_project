@@ -1,0 +1,43 @@
+﻿@model List<kurs_project.Models.Teacher>
+@{
+    ViewBag.Title = "Teachers and Courses";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Teachers and Their Courses</h2>
+
+    <div class="text-end">
+        <a asp-action="Create" class="btn btn-success">Assign Course to Teacher</a>
+    </div>
+
+    @foreach (var teacher in Model)
+    {
+        <div class="card mb-3 shadow-sm">
+            <div class="card-body">
+                <h4 class="card-title text-primary">@teacher.Name</h4>
+
+                <ul class="list-group list-group-flush">
+                    @if (teacher.TeacherCourses?.Any() == true)
+                    {
+                        foreach (var tc in teacher.TeacherCourses)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <span>@tc.Course.Title</span>
+                                <form asp-action="Delete" method="post" class="m-0">
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="teacherId" value="@tc.TeacherId" />
+                                    <input type="hidden" name="courseId" value="@tc.CourseId" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Remove</button>
+                                </form>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="list-group-item text-muted">No courses assigned</li>
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<kurs_project.Models.Grade>
+@{
+    ViewBag.Title = "Grade List";
+}
+
+<h1>Grade List</h1>
+
+<a asp-action="Create" class="btn btn-success">Add New Grade</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Student</th>
+            <th>Course</th>
+            <th>Grade</th>
+            <th>Comment</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var grade in Model)
+        {
+            <tr>
+                <td>@grade.Student?.Name</td>
+                <td>@grade.Course?.Title</td>
+                <td>@grade.Score</td>
+                <td>@(string.IsNullOrEmpty(grade.Comment) ? "No comment" : grade.Comment)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@grade.Id" class="btn btn-primary">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@grade.Id" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

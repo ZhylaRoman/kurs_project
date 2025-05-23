@@ -1,0 +1,34 @@
+﻿@model IEnumerable<kurs_project.Models.Course>
+@{
+    ViewData["Title"] = "Courses";
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Courses</h1>
+
+    <a asp-action="Create" class="btn btn-primary mb-3">Add New Course</a>
+
+    @if (Model != null && Model.Any())
+    {
+        <ul class="list-group mt-3">
+            @foreach (var course in Model)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>
+                        <strong>@course.Title</strong>
+                        <br />
+                        <small>@course.Category?.Name</small>
+                    </span>
+                    <span>
+                        <a asp-action="Edit" asp-route-id="@course.Id" class="btn btn-sm btn-warning">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@course.Id" class="btn btn-sm btn-danger">Delete</a>
+                    </span>
+                </li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>No courses available.</p>
+    }
+</div>

@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Add Student to Course";
+    var students = ViewBag.Students as List<kurs_project.Models.Student>;
+    var courses = ViewBag.Courses as List<kurs_project.Models.Course>;
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Add Student to Course</h2>
+
+    <form asp-action="Create" method="post" class="card p-4 shadow-sm">
+        <div class="mb-3">
+            <label for="studentId" class="form-label">Student:</label>
+            <select id="studentId" name="studentId" class="form-select" required>
+                <option value="">-- Select Student --</option>
+                @foreach (var s in students)
+                {
+                    <option value="@s.Id">@s.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="courseId" class="form-label">Course:</label>
+            <select id="courseId" name="courseId" class="form-select" required>
+                <option value="">-- Select Course --</option>
+                @foreach (var c in courses)
+                {
+                    <option value="@c.Id">@c.Title</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Add</button>
+    </form>
+</div>

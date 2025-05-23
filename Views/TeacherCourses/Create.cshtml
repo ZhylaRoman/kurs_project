@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Assign Course to Teacher";
+}
+
+<div class="container mt-4">
+    <h2 class="mb-4">Assign Course to Teacher</h2>
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="mb-3">
+            <label for="teacherId" class="form-label">Teacher</label>
+            <select class="form-select" id="teacherId" name="teacherId" required>
+                <option value="">-- Select Teacher --</option>
+                @foreach (var teacher in ViewBag.Teachers)
+                {
+                    <option value="@teacher.Id">@teacher.Name</option>
+                }
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="courseId" class="form-label">Course</label>
+            <select class="form-select" id="courseId" name="courseId" required>
+                <option value="">-- Select Course --</option>
+                @foreach (var course in ViewBag.Courses)
+                {
+                    <option value="@course.Id">@course.Title</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-success">Assign</button>
+        <a asp-action="Index" class="btn btn-secondary">Back</a>
+    </form>
+</div>
